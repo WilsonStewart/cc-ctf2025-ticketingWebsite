@@ -1,5 +1,6 @@
-import "dotenv/config";
-import BetterSqlite3, { Database } from "better-sqlite3";
+// import "dotenv/config";
+// import BetterSqlite3, { Database } from "better-sqlite3";
+import { Database, sqlite3 } from "sqlite3";
 
 type Opts = {
   debug?: boolean;
@@ -9,7 +10,7 @@ let initializedTimes: number = 0;
 
 class MainDB {
   private static instance: MainDB | null = null;
-  private db: Database | undefined;
+  private db: Database | undefined
 
   private constructor(opts: Opts) {
     this.initializeDB(opts);
@@ -24,8 +25,8 @@ class MainDB {
 
   private initializeDB(opts: Opts) {
     initializedTimes++;
-    const db = new BetterSqlite3("db.db");
-    console.log(`INSTANCE HAS BEEN INITIALIZED ${initializedTimes} TIMES`);
+    const db = new Database("main.db")
+    console.log("INSTANCE HAS BEEN INITIALIZED " + initializedTimes + " TIMES");
   }
 
   public getDB() {
